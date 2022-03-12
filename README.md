@@ -34,7 +34,7 @@ Para executar o projeto, entre no container com o php instalado;
 ```bash
      $ docker exec -it backend /bin/bash
 ```
-e em seguinda, exceute o arquivo:
+e em seguinda, exceute o comando:
 
 ```bash
      $ php artisan water:fill
