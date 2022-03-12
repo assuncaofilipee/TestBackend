@@ -48,6 +48,7 @@ class WaterFillCommand extends Command
 
             if(!$validation->validator($arrayLength)) {
                 $this->line("Somente números inteiros");
+                return 0;
             }
 
             if($arrayLength < 3) {
