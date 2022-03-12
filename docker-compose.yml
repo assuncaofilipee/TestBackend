@@ -1,0 +1,11 @@
+version: '3.7'
+
+services:
+  # PHP (com Nginx)
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: backend
+    volumes:
+      - .:/app
