@@ -92,7 +92,7 @@ class WaterFillCommand extends Command
             foreach ($silhouette as $value) {
 
                 if (!$validation->validator($value)) {
-                    $this->line('Silhueta deve possuir apenas números inteiros');
+                    $this->line('Silhueta deve possuir apenas números inteiros.');
                     return 0;
                 }
             }

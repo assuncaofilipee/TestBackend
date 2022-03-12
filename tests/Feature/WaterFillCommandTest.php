@@ -124,4 +124,18 @@ class WaterFillCommandTest extends TestCase
        ->expectsQuestion('Digite o conteúdo do array (silhueta), separado por espaço: ', 'dasds')
        ->expectsOutput('Formato de silhueta inválido.');
    }
+
+     /**
+    * @test
+    *
+    * @return void
+    */
+    public function shoundErrorNotIntegerArrayData()
+    {
+        $this->artisan('water:fill')
+        ->expectsQuestion('Digite a quantidade de casos (1 >= N <= 100): ', 1)
+        ->expectsQuestion('Digite o tamanho do array (> 2): ', 3)
+        ->expectsQuestion('Digite o conteúdo do array (silhueta), separado por espaço: ', '1.5 5 6')
+        ->expectsOutput('Silhueta deve possuir apenas números inteiros.');
+    }
 }
