@@ -19,6 +19,30 @@ class WaterFillCommandTest extends TestCase
         ->expectsOutput('Result: 16');
     }
 
+        /**
+     * @test
+     *
+     * @return void
+     */
+    public function shoundErrorEmptyLengthCases()
+    {
+        $this->artisan('water:fill')
+        ->expectsQuestion('Digite a quantidade de casos (1 >= N <= 100): ', null)
+        ->expectsOutput('Quantidade de casos é obrigatório.');
+    }
+
+      /**
+     * @test
+     *
+     * @return void
+     */
+    public function shoundErrorNotIntegerLengthCases()
+    {
+        $this->artisan('water:fill')
+        ->expectsQuestion('Digite a quantidade de casos (1 >= N <= 100): ', 'dsd')
+        ->expectsOutput('Quantidade de casos deve ser um número inteiro.');
+    }
+
     /**
      * @test
      *
@@ -27,8 +51,8 @@ class WaterFillCommandTest extends TestCase
     public function shoundErrorInvalidLengthCases()
     {
         $this->artisan('water:fill')
-        ->expectsQuestion('Digite a quantidade de casos (1 >= N <= 100): ', '101')
-        ->expectsOutput('Quantidade inválida!');
+        ->expectsQuestion('Digite a quantidade de casos (1 >= N <= 100): ', 101)
+        ->expectsOutput('Quantidade de casos deve ser um número entre 1 a 100.');
     }
 
     /**
@@ -36,12 +60,13 @@ class WaterFillCommandTest extends TestCase
      *
      * @return void
      */
-    public function shoundErrorInvalidLengthArray()
+    public function shoundErrorEmptyLengthArray()
     {
         $this->artisan('water:fill')
         ->expectsQuestion('Digite a quantidade de casos (1 >= N <= 100): ', 1)
-        ->expectsQuestion('Digite o tamanho do array (> 2): ', 1)
-        ->expectsOutput('Tamanho inválido!');
+        ->expectsQuestion('Digite o tamanho do array (> 2): ', NULL)
+        ->expectsQuestion('Digite o conteúdo do array (silhueta), separado por espaço: ', null)
+        ->expectsOutput('Tamanho do array é obrigatório.');
     }
 
     /**
@@ -49,12 +74,54 @@ class WaterFillCommandTest extends TestCase
      *
      * @return void
      */
-    public function shoundErrorInvalidArrayData()
+    public function shoundErrorNotIntegerLengthArray()
+    {
+        $this->artisan('water:fill')
+        ->expectsQuestion('Digite a quantidade de casos (1 >= N <= 100): ', 1)
+        ->expectsQuestion('Digite o tamanho do array (> 2): ', 'dasd')
+        ->expectsQuestion('Digite o conteúdo do array (silhueta), separado por espaço: ', null)
+        ->expectsOutput('Tamanho do array deve ser um número inteiro.');
+    }
+
+      /**
+     * @test
+     *
+     * @return void
+     */
+    public function shoundErrorGtLengthArray()
+    {
+        $this->artisan('water:fill')
+        ->expectsQuestion('Digite a quantidade de casos (1 >= N <= 100): ', 1)
+        ->expectsQuestion('Digite o tamanho do array (> 2): ', 2)
+        ->expectsQuestion('Digite o conteúdo do array (silhueta), separado por espaço: ', null)
+        ->expectsOutput('Tamanho do array deve ser maior do que 2.');
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     */
+    public function shoundErrorEmptyArrayData()
     {
         $this->artisan('water:fill')
         ->expectsQuestion('Digite a quantidade de casos (1 >= N <= 100): ', 1)
         ->expectsQuestion('Digite o tamanho do array (> 2): ', 3)
-        ->expectsQuestion('Digite o conteúdo do array (silhueta), separado por espaço: ', 'ss')
-        ->expectsOutput('Formato de array inválido');
+        ->expectsQuestion('Digite o conteúdo do array (silhueta), separado por espaço: ', null)
+        ->expectsOutput('Silhueta é obrigatória.');
     }
+
+    /**
+    * @test
+    *
+    * @return void
+    */
+   public function shoundErrorEmptyInvalidArrayData()
+   {
+       $this->artisan('water:fill')
+       ->expectsQuestion('Digite a quantidade de casos (1 >= N <= 100): ', 1)
+       ->expectsQuestion('Digite o tamanho do array (> 2): ', 3)
+       ->expectsQuestion('Digite o conteúdo do array (silhueta), separado por espaço: ', 'dasds')
+       ->expectsOutput('Formato de silhueta inválido.');
+   }
 }

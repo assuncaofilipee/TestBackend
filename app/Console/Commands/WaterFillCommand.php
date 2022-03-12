@@ -4,7 +4,9 @@ namespace App\Console\Commands;
 
 use App\Action\WaterFill;
 use App\Helpers\Validation;
+use App\Rules\ArraySpace;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Validator;
 
 class WaterFillCommand extends Command
 {
@@ -33,55 +35,70 @@ class WaterFillCommand extends Command
 
         $events = $this->ask("Digite a quantidade de casos (1 >= N <= 100): ");
 
-        if(!$validation->validator($events)) {
-            $this->line("Somente números inteiros");
-            return 0;
+
+        $validator = Validator::make(
+            [
+                'events' => $events
+            ],
+            [
+                'events' => ['required', 'integer', 'between:1,100'],
+            ],
+            [
+                'events.required' => 'Quantidade de casos é obrigatório.',
+                'events.integer' => 'Quantidade de casos deve ser um número inteiro.',
+                'events.between' => 'Quantidade de casos deve ser um número entre 1 a 100.'
+            ]
+        );
+
+        if ($validator->fails()) {
+            foreach ($validator->errors()->all() as $error) {
+                $this->error($error);
+            }
+            return 1;
         }
 
-        if($events <= 0 || $events > 100) {
-            $this->line("Quantidade inválida!");
-            return 0;
-        }
+        for ($i = 0; $i < $events; $i++) {
 
-        for($i = 0; $i < $events; $i++) {
             $arrayLength = $this->ask("Digite o tamanho do array (> 2): ");
-
-            if(!$validation->validator($arrayLength)) {
-                $this->line("Somente números inteiros");
-                return 0;
-            }
-
-            if($arrayLength < 3) {
-                $this->line("Tamanho inválido!");
-                return 0;
-            }
-
             $silhouette = $this->ask("Digite o conteúdo do array (silhueta), separado por espaço: ");
-            $silhouette = trim($silhouette);
 
-            if(strpos($silhouette, " ") === false) {
-                $this->line("Formato de array inválido");
-                return 0;
+            $validator = Validator::make(
+                [
+                    'arrayLength' => $arrayLength,
+                    'silhouette' => $silhouette
+                ],
+                [
+                    'arrayLength' => ['required', 'integer', 'gt:2'],
+                    'silhouette' => ['required', new ArraySpace]
+                ],
+                [
+                    'arrayLength.required' => 'Tamanho do array é obrigatório.',
+                    'arrayLength.integer' => 'Tamanho do array deve ser um número inteiro.',
+                    'arrayLength.gt' => 'Tamanho do array deve ser maior do que 2.',
+                    'silhouette.required' => 'Silhueta é obrigatória.'
+                ]
+            );
+
+            if ($validator->fails()) {
+                foreach ($validator->errors()->all() as $error) {
+                    $this->error($error);
+                }
+                return 1;
             }
 
+            $silhouette = trim($silhouette);
             $silhouette = explode(" ", $silhouette);
 
-            if($arrayLength != sizeof($silhouette)) {
-                $this->line("Tamanho do array inválido");
-                return 0;
-            }
+            foreach ($silhouette as $value) {
 
-            foreach($silhouette as $value) {
-
-                if(!$validation->validator($value)) {
-                    $this->line('Somente números inteiros');
+                if (!$validation->validator($value)) {
+                    $this->line('Silhueta deve possuir apenas números inteiros');
                     return 0;
                 }
             }
 
             $waterFill = new WaterFill();
-            $this->line("Result: ". $waterFill->waterFill($silhouette, 0, $arrayLength));
+            $this->line("Result: " . $waterFill->waterFill($silhouette, 0, $arrayLength));
         }
     }
-
 }
