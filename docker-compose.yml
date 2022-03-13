@@ -9,3 +9,5 @@ services:
     container_name: backend
     volumes:
       - .:/app
+    tty: true
+    command: composer install
