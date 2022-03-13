@@ -4,7 +4,7 @@ namespace App\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
 
-class ArraySpace implements Rule
+class Silhouette implements Rule
 {
     /**
      * Create a new rule instance.
@@ -23,9 +23,19 @@ class ArraySpace implements Rule
      * @param  mixed  $value
      * @return bool
      */
-    public function passes($attribute, $value)
+    public function passes($attribute, $values)
     {
-        return strpos($value, " ") !== false;
+        if(strpos($values, " ") !== false) {
+            $values = trim($values);
+            $values = explode(" ", $values);
+
+            foreach ($values as $value) {
+                if (preg_match ("/[^0-9]/", $value)) {
+                    return false;
+                }
+            }
+            return true;
+        }
     }
 
     /**

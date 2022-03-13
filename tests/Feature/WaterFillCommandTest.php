@@ -17,7 +17,7 @@ class WaterFillCommandTest extends TestCase
         ->expectsQuestion('Digite o tamanho do array (> 2): ', '9')
         ->expectsQuestion('Digite o conteúdo do array (silhueta), separado por espaço: ', '5 4 3 2 1 2 3 4 5')
         ->expectsOutput('Result: 16')
-        ->assertExitCode(0);
+        ->assertExitCode(1);
     }
 
         /**
@@ -145,7 +145,22 @@ class WaterFillCommandTest extends TestCase
         ->expectsQuestion('Digite a quantidade de casos (1 >= N <= 100): ', 1)
         ->expectsQuestion('Digite o tamanho do array (> 2): ', 3)
         ->expectsQuestion('Digite o conteúdo do array (silhueta), separado por espaço: ', '1.5 5 6')
-        ->expectsOutput('Silhueta deve possuir apenas números inteiros.')
+        ->expectsOutput('Formato de silhueta inválido.')
+        ->assertExitCode(0);
+    }
+
+    /**
+    * @test
+    *
+    * @return void
+    */
+    public function shoundErrorArrayLengthNotEqualsSilhoueteLength()
+    {
+        $this->artisan('water:fill')
+        ->expectsQuestion('Digite a quantidade de casos (1 >= N <= 100): ', 1)
+        ->expectsQuestion('Digite o tamanho do array (> 2): ', 3)
+        ->expectsQuestion('Digite o conteúdo do array (silhueta), separado por espaço: ', '1 5 6 4')
+        ->expectsOutput('Tamanho do array não corresponde com a silhueta.')
         ->assertExitCode(0);
     }
 }

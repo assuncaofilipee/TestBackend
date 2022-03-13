@@ -3,8 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Action\WaterFill;
-use App\Helpers\Validation;
-use App\Rules\ArraySpace;
+use App\Rules\Silhouette;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Validator;
 
@@ -31,10 +30,7 @@ class WaterFillCommand extends Command
      */
     public function handle()
     {
-        $validation = new Validation();
-
         $events = $this->ask("Digite a quantidade de casos (1 >= N <= 100): ");
-
 
         $validator = Validator::make(
             [
@@ -69,7 +65,7 @@ class WaterFillCommand extends Command
                 ],
                 [
                     'arrayLength' => ['required', 'integer', 'gt:2'],
-                    'silhouette' => ['required', new ArraySpace]
+                    'silhouette' => ['required', new Silhouette]
                 ],
                 [
                     'arrayLength.required' => 'Tamanho do array é obrigatório.',
@@ -89,16 +85,16 @@ class WaterFillCommand extends Command
             $silhouette = trim($silhouette);
             $silhouette = explode(" ", $silhouette);
 
-            foreach ($silhouette as $value) {
+            if($arrayLength  < sizeof($silhouette)) {
+                $this->line('Tamanho do array não corresponde com a silhueta.');
+                return 0;
 
-                if (!$validation->validator($value)) {
-                    $this->line('Silhueta deve possuir apenas números inteiros.');
-                    return 0;
-                }
             }
 
             $waterFill = new WaterFill();
             $this->line("Result: " . $waterFill->waterFill($silhouette, 0, $arrayLength));
         }
+
+        return 1;
     }
 }
