@@ -29,7 +29,7 @@ Na primeira vez que for iniciar o container, rode o comando que irá realizar a 
     $ docker-compose up --build -d
 ```
 
-Para executar o projeto, entre no container com o php instalado;
+Para executar o projeto, entre no container;
 
 ```bash
      $ docker exec -it backend /bin/bash
