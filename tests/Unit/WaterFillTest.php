@@ -3,7 +3,7 @@
 namespace Tests\Unit;
 
 use App\Action\WaterFill;
-use PHPUnit\Framework\TestCase;
+use Tests\TestCase;
 
 class WaterFillTest extends TestCase
 {
