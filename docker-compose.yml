@@ -9,3 +9,4 @@ services:
     container_name: backend
     volumes:
       - .:/app
+    command: composer install --ignore-plataform-reqs
