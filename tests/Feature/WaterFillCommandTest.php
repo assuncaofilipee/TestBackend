@@ -16,7 +16,8 @@ class WaterFillCommandTest extends TestCase
         ->expectsQuestion('Digite a quantidade de casos (1 >= N <= 100): ', 1)
         ->expectsQuestion('Digite o tamanho do array (> 2): ', '9')
         ->expectsQuestion('Digite o conteúdo do array (silhueta), separado por espaço: ', '5 4 3 2 1 2 3 4 5')
-        ->expectsOutput('Result: 16');
+        ->expectsOutput('Result: 16')
+        ->assertExitCode(0);
     }
 
         /**
@@ -28,7 +29,8 @@ class WaterFillCommandTest extends TestCase
     {
         $this->artisan('water:fill')
         ->expectsQuestion('Digite a quantidade de casos (1 >= N <= 100): ', null)
-        ->expectsOutput('Quantidade de casos é obrigatório.');
+        ->expectsOutput('Quantidade de casos é obrigatório.')
+        ->assertExitCode(0);
     }
 
       /**
@@ -40,7 +42,8 @@ class WaterFillCommandTest extends TestCase
     {
         $this->artisan('water:fill')
         ->expectsQuestion('Digite a quantidade de casos (1 >= N <= 100): ', 'dsd')
-        ->expectsOutput('Quantidade de casos deve ser um número inteiro.');
+        ->expectsOutput('Quantidade de casos deve ser um número inteiro.')
+        ->assertExitCode(0);
     }
 
     /**
@@ -52,7 +55,8 @@ class WaterFillCommandTest extends TestCase
     {
         $this->artisan('water:fill')
         ->expectsQuestion('Digite a quantidade de casos (1 >= N <= 100): ', 101)
-        ->expectsOutput('Quantidade de casos deve ser um número entre 1 a 100.');
+        ->expectsOutput('Quantidade de casos deve ser um número entre 1 a 100.')
+        ->assertExitCode(0);
     }
 
     /**
@@ -66,7 +70,8 @@ class WaterFillCommandTest extends TestCase
         ->expectsQuestion('Digite a quantidade de casos (1 >= N <= 100): ', 1)
         ->expectsQuestion('Digite o tamanho do array (> 2): ', NULL)
         ->expectsQuestion('Digite o conteúdo do array (silhueta), separado por espaço: ', null)
-        ->expectsOutput('Tamanho do array é obrigatório.');
+        ->expectsOutput('Tamanho do array é obrigatório.')
+        ->assertExitCode(0);
     }
 
     /**
@@ -80,7 +85,8 @@ class WaterFillCommandTest extends TestCase
         ->expectsQuestion('Digite a quantidade de casos (1 >= N <= 100): ', 1)
         ->expectsQuestion('Digite o tamanho do array (> 2): ', 'dasd')
         ->expectsQuestion('Digite o conteúdo do array (silhueta), separado por espaço: ', null)
-        ->expectsOutput('Tamanho do array deve ser um número inteiro.');
+        ->expectsOutput('Tamanho do array deve ser um número inteiro.')
+        ->assertExitCode(0);
     }
 
       /**
@@ -94,7 +100,8 @@ class WaterFillCommandTest extends TestCase
         ->expectsQuestion('Digite a quantidade de casos (1 >= N <= 100): ', 1)
         ->expectsQuestion('Digite o tamanho do array (> 2): ', 2)
         ->expectsQuestion('Digite o conteúdo do array (silhueta), separado por espaço: ', null)
-        ->expectsOutput('Tamanho do array deve ser maior do que 2.');
+        ->expectsOutput('Tamanho do array deve ser maior do que 2.')
+        ->assertExitCode(0);
     }
 
     /**
@@ -108,7 +115,8 @@ class WaterFillCommandTest extends TestCase
         ->expectsQuestion('Digite a quantidade de casos (1 >= N <= 100): ', 1)
         ->expectsQuestion('Digite o tamanho do array (> 2): ', 3)
         ->expectsQuestion('Digite o conteúdo do array (silhueta), separado por espaço: ', null)
-        ->expectsOutput('Silhueta é obrigatória.');
+        ->expectsOutput('Silhueta é obrigatória.')
+        ->assertExitCode(0);
     }
 
     /**
@@ -122,7 +130,8 @@ class WaterFillCommandTest extends TestCase
        ->expectsQuestion('Digite a quantidade de casos (1 >= N <= 100): ', 1)
        ->expectsQuestion('Digite o tamanho do array (> 2): ', 3)
        ->expectsQuestion('Digite o conteúdo do array (silhueta), separado por espaço: ', 'dasds')
-       ->expectsOutput('Formato de silhueta inválido.');
+       ->expectsOutput('Formato de silhueta inválido.')
+       ->assertExitCode(0);
    }
 
      /**
@@ -136,6 +145,7 @@ class WaterFillCommandTest extends TestCase
         ->expectsQuestion('Digite a quantidade de casos (1 >= N <= 100): ', 1)
         ->expectsQuestion('Digite o tamanho do array (> 2): ', 3)
         ->expectsQuestion('Digite o conteúdo do array (silhueta), separado por espaço: ', '1.5 5 6')
-        ->expectsOutput('Silhueta deve possuir apenas números inteiros.');
+        ->expectsOutput('Silhueta deve possuir apenas números inteiros.')
+        ->assertExitCode(0);
     }
 }

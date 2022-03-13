@@ -54,7 +54,7 @@ class WaterFillCommand extends Command
             foreach ($validator->errors()->all() as $error) {
                 $this->error($error);
             }
-            return 1;
+            return 0;
         }
 
         for ($i = 0; $i < $events; $i++) {
@@ -83,7 +83,7 @@ class WaterFillCommand extends Command
                 foreach ($validator->errors()->all() as $error) {
                     $this->error($error);
                 }
-                return 1;
+                return 0;
             }
 
             $silhouette = trim($silhouette);
