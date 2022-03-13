@@ -85,7 +85,7 @@ class WaterFillCommand extends Command
             $silhouette = trim($silhouette);
             $silhouette = explode(" ", $silhouette);
 
-            if($arrayLength  < sizeof($silhouette)) {
+            if($arrayLength != sizeof($silhouette)) {
                 $this->line('Tamanho do array não corresponde com a silhueta.');
                 return 0;
 
