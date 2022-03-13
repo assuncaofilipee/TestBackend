@@ -4,6 +4,4 @@ WORKDIR /app
 
 COPY --chown=ambientum:ambientum . /app
 
-RUN composer install
-
-RUN composer dumpautoload
+RUN composer install &&  composer dumpautoload
