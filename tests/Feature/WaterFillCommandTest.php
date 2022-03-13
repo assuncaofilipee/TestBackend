@@ -20,7 +20,7 @@ class WaterFillCommandTest extends TestCase
         ->assertExitCode(1);
     }
 
-        /**
+    /**
      * @test
      *
      * @return void
@@ -33,7 +33,7 @@ class WaterFillCommandTest extends TestCase
         ->assertExitCode(0);
     }
 
-      /**
+    /**
      * @test
      *
      * @return void
