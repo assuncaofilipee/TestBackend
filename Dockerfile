@@ -4,5 +4,6 @@ WORKDIR /app
 
 COPY --chown=ambientum:ambientum . /app
 
-COPY --from=composer /usr/bin/composer /usr/bin/composer
-RUN composer install
+RUN composer install --ignore-platform-reqs --prefer-dist --no-scripts --no-progress --no-interaction --no-dev --no-autoloader
+
+RUN composer dump-autoload --optimize --apcu --no-dev
