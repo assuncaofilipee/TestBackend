@@ -154,7 +154,7 @@ class WaterFillCommandTest extends TestCase
     *
     * @return void
     */
-    public function shoundErrorArrayLengthNotEqualsSilhoueteLength()
+    public function shoundErrorArrayLengthNotEqualsSilhouetteLength()
     {
         $this->artisan('water:fill')
         ->expectsQuestion('Digite a quantidade de casos (1 >= N <= 100): ', 1)
