@@ -50,7 +50,7 @@ class WaterFillCommand extends Command
             foreach ($validator->errors()->all() as $error) {
                 $this->error($error);
             }
-            return 0;
+            return 1;
         }
 
         for ($i = 0; $i < $events; $i++) {
@@ -79,21 +79,19 @@ class WaterFillCommand extends Command
                 foreach ($validator->errors()->all() as $error) {
                     $this->error($error);
                 }
-                return 0;
+                return 1;
             }
 
             $silhouette = explode(" ", $silhouette);
 
             if($arrayLength != sizeof($silhouette)) {
                 $this->line('Tamanho do array não corresponde com a silhueta.');
-                return 0;
+                return 1;
 
             }
 
             $waterFill = new WaterFill();
             $this->line("Result: " . $waterFill->waterFill($silhouette, 0, $arrayLength));
         }
-
-        return 1;
     }
 }
