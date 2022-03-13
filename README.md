@@ -37,6 +37,10 @@ Para executar o projeto, entre no container com o php instalado;
 e em seguinda, exceute o comando:
 
 ```bash
+     $ composer install
+```
+Para executar o projeto execute o comando:
+```bash
      $ php artisan water:fill
 ```
 
