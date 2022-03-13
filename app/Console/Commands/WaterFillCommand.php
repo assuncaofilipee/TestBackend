@@ -82,7 +82,6 @@ class WaterFillCommand extends Command
                 return 0;
             }
 
-            $silhouette = trim($silhouette);
             $silhouette = explode(" ", $silhouette);
 
             if($arrayLength != sizeof($silhouette)) {

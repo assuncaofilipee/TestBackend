@@ -26,7 +26,6 @@ class Silhouette implements Rule
     public function passes($attribute, $values)
     {
         if(strpos($values, " ") !== false) {
-            $values = trim($values);
             $values = explode(" ", $values);
 
             foreach ($values as $value) {
