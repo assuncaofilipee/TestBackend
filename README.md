@@ -34,12 +34,12 @@ Para executar o projeto, entre no container com o php instalado;
 ```bash
      $ docker exec -it backend /bin/bash
 ```
-e em seguinda, exceute o comando:
+e em seguinda, instale as depêndencias:
 
 ```bash
      $ composer install
 ```
-Para executar o projeto execute o comando:
+Para executar o projeto:
 ```bash
      $ php artisan water:fill
 ```
