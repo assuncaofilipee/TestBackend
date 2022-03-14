@@ -44,8 +44,6 @@ Para executar o projeto:
      $ php artisan water:fill
 ```
 
-## :orange_circle: Testes
-
 Para executar todos os testes do projeto execute o comando:
 
 ```bash
