@@ -49,5 +49,5 @@ Para executar o projeto:
 Para executar todos os testes do projeto execute o comando:
 
 ```bash
-     $ php artisan test
+     $ composer test
 ```

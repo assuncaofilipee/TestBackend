@@ -1,11 +1,9 @@
 version: '3.7'
-
 services:
-  # PHP (com Nginx)
-  app:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: backend
-    volumes:
-      - .:/app
+    php-fpm:
+        build: phpdocker/php-fpm
+        working_dir: /application
+        container_name: backend
+        volumes:
+            - '.:/application'
+            - './phpdocker/php-fpm/php-ini-overrides.ini:/etc/php/8.1/fpm/conf.d/99-overrides.ini'

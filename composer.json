@@ -6,8 +6,6 @@
     "license": "MIT",
     "require": {
         "php": "^8.0.2",
-        "cerbero/command-validator": "^2.5",
-        "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^9.2",
         "laravel/sanctum": "^2.14.1",
         "laravel/tinker": "^2.7"
@@ -47,7 +45,7 @@
             "@php artisan key:generate --ansi"
         ],
         "test": [
-            "./vendor/bin/phpunit test"
+            "XDEBUG_MODE=coverage ./vendor/bin/phpunit --coverage-text"
        ]
     },
     "extra": {
